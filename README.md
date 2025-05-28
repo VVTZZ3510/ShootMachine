@@ -18,7 +18,7 @@
 	* **Maximum** Shooting Rate:    $15000mm/s$
 	* Shooting **Delay**:    $22ms - 35ms$
 	* **Range** of Motion
-		* **Pitch** Angle:   起于$xoy$平面 向 $z$轴 正方向 $5^{\circ} - 90^{\circ}$
+		* **Pitch** Angle:   起于 $xoy$平面  向 $z$轴 正方向 $5^{\circ} - 90^{\circ}$
 		* **Rotation** Angle:    起于 $y$轴正方向 向 $y$轴负方向  $0^{\circ} - 180^{\circ}$
 
 * **投篮区域**
@@ -37,7 +37,7 @@
 		* **抖动**
 		* **实际投篮**
 
-3. 篮球斜抛 直至击中 平面$x=10000mm$ 
+3. 篮球斜抛 直至击中 $x=10000mm$平面 
 
 4. 篮筐击中**检查**
 

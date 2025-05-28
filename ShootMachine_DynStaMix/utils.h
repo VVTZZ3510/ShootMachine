@@ -31,8 +31,8 @@ inline double get_distance_xoy(const Point startpoint, const Point endpoint) {
 
 	double delta_x = endpoint.x - startpoint.x;
 
-	if (delta_x <= 0)
-		return -1;
+	//if (delta_x <= 0)
+		//return -1;
 
 	double delta_y = endpoint.y - startpoint.y;
 
@@ -43,8 +43,11 @@ inline double figure_out_alpha(const Point startpoint, const Point endpoint) {
 
 	double delta_x = endpoint.x - startpoint.x;
 
+	int multi = -1;
+	
 	if (delta_x <= 0)
-		return -1;
+		multi = 1;
+		//return -1;
 
 	double delta_y = endpoint.y - startpoint.y;
 
@@ -59,7 +62,7 @@ inline double figure_out_alpha(const Point startpoint, const Point endpoint) {
 	else
 		return -1;
 
-	return delta_y >= 0 ? alpha : M_PI - alpha;
+	return delta_y >= 0 ? (M_PI * (1 + multi) + alpha) : (M_PI +  (multi * alpha));
 }	//	返回向量与y轴正方向的夹角
 
 //	velocity*cos(theta) = len / t

@@ -143,7 +143,7 @@ void Machine::Moving_Dynamic(const Point pos_mach) {
 
 	std::cout << "Machine Moving......" << std::endl;
 
-	beta = figure_out_alpha({ 0,0,0 }, pos_mach);
+	beta = figure_out_alpha(position_machine, pos_mach);
 	std::cout << "\t Machine_move_beta: " << beta << std::endl;
 
 	position_machine = pos_mach;
@@ -185,6 +185,7 @@ void Machine::Aiming_Dynamic(const Point pos_tar) {
 	
 	double ideal_shoot_velocity_xoy = ideal_shoot_velocity * cos(ideal_theta);	//	xoy上的速度分类（合成速度）
 	double shoot_velocity_z = ideal_shoot_velocity * sin(ideal_theta);	//	z方向的速度分量
+	//std::cout << "\t shoot_velocity_z: " << shoot_velocity_z << std::endl;
 
 	vector_reshape(vec_move_velocity, MOVE_VELOCITY);
 	vector_reshape(vec_ball_track_xoy, ideal_shoot_velocity_xoy);
@@ -193,9 +194,11 @@ void Machine::Aiming_Dynamic(const Point pos_tar) {
 	std::cout << "\t alpha: " << alpha << std::endl;
 
 	double shoot_velocity_xoy = get_distance_xoy(vec_move_velocity, vec_ball_track_xoy);
+	//std::cout << "\t shoot_velocity_xoy: " << shoot_velocity_xoy << std::endl;
+
 	shoot_velocity = sqrt(shoot_velocity_xoy * shoot_velocity_xoy + shoot_velocity_z * shoot_velocity_z);
 	std::cout << "\t shoot_velocity: " << shoot_velocity << std::endl;
-
+	
 	theta = atan(shoot_velocity_z / shoot_velocity_xoy);
 	std::cout << "\t theta: " << theta << std::endl;
 }

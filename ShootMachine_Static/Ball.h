@@ -3,18 +3,17 @@
 #include <map>
 #include "utils.h"
 
-class Ball
-{
+class Ball {
 
 public:
 
 	Ball();
 
-	Ball(const Point pos);
+	Ball(const Point& pos);
 
 	~Ball();
 
-	const Point GetBallPos() const;
+	const Point& GetBallPos() const;
 	int GetBallDiameter() const;
 
 	enum class Direction {
@@ -23,9 +22,9 @@ public:
 		VELOCITY_Z
 	};
 
-	void SetBallPos(const Point new_pos);
+	void SetBallPos(const Point& new_pos);
 
-	void SetBallVelocity(const Direction dir, double vel);
+	void SetBallVelocity(Direction dir, double vel);
 
 	void BallFlyDown(double x_tar);
 
@@ -35,5 +34,5 @@ private:
 
 	int DIAMETER_BALL = 264;	//	mm
 
-	std::map<Direction, double> velocity;	//	mm/s^2
+	std::map<Direction, double> velocity;	//	mm/s
 };

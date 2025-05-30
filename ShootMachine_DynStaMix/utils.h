@@ -18,7 +18,7 @@ struct Point {
 	double z;
 };
 
-inline double get_distance(const Point startpoint, const Point endpoint) {
+inline double get_distance(const Point& startpoint, const Point& endpoint) {
 
 	double delta_x = endpoint.x - startpoint.x;
 	double delta_y = endpoint.y - startpoint.y;
@@ -27,7 +27,7 @@ inline double get_distance(const Point startpoint, const Point endpoint) {
 	return sqrt(delta_x * delta_x + delta_y * delta_y + delta_z * delta_z);
 }	//	返回两点距离
 
-inline double get_distance_xoy(const Point startpoint, const Point endpoint) {
+inline double get_distance_xoy(const Point& startpoint, const Point& endpoint) {
 
 	double delta_x = endpoint.x - startpoint.x;
 
@@ -39,7 +39,7 @@ inline double get_distance_xoy(const Point startpoint, const Point endpoint) {
 	return sqrt(delta_x * delta_x + delta_y * delta_y);
 }	//	返回两点XOY平面距离
 
-inline double figure_out_alpha(const Point startpoint, const Point endpoint) {
+inline double figure_out_alpha(const Point& startpoint, const Point& endpoint) {
 
 	double delta_x = endpoint.x - startpoint.x;
 
@@ -116,7 +116,7 @@ inline double generate_gaussian(double mean, double stddev) {
 
 //	Dynamic
 
-inline Point vector_subtract_xoy(Point point1, Point point2) {
+inline Point vector_subtract_xoy(const Point& point1, const Point& point2) {
 
 	Point tmp = { 0,0,0 };
 	tmp.x = point2.x - point1.x;
@@ -125,7 +125,7 @@ inline Point vector_subtract_xoy(Point point1, Point point2) {
 	return tmp;
 }	//	向量减法
 
-inline Point vector_reshape(Point& vector, double scale) {
+inline const Point vector_reshape(Point& vector, double scale) {
 
 	double length = get_distance_xoy({ 0,0,0 }, vector);
 	

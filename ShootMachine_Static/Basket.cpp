@@ -11,7 +11,7 @@ Basket::~Basket() {
 
 }
 
-const Point Basket::GetPosBasket() const {
+const Point& Basket::GetPosBasket() const {
 
 	return position_basket;
 }

@@ -1,7 +1,9 @@
 #include "Machine.h"
 #include "Basket.h"
 
-//	环境
+const bool is_Dynamic = true;
+
+//	场地
 const double LENGTH_X = 10000;	//	mm
 const double LENGTH_Y = 10000;	//	mm
 const double HEIGHT = 2000;		//	mm
@@ -23,8 +25,10 @@ int main() {
 
 	for (int i = 0; i < 5; i++) {
 
-		//machine.LetsGo(GenerateLaunchPosition(), basket.GetPosBasket());
-		machine.LetsGo_Dynamic(GenerateLaunchPosition(), basket.GetPosBasket());
+		if(is_Dynamic)
+			machine.LetsGo_Dynamic(GenerateLaunchPosition(), basket.GetPosBasket());
+		else
+			machine.LetsGo(GenerateLaunchPosition(), basket.GetPosBasket());
 
 		LAUNCH_TIMES++;
 

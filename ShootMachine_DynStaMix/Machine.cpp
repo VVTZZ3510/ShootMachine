@@ -31,7 +31,7 @@ const Ball* Machine::GetBall() const {
 
 //	Static
 
-void Machine::Moving(const Point pos_mach) {
+void Machine::Moving(const Point& pos_mach) {
 
 	std::cout << "Machine Moving......" << std::endl;
 
@@ -41,7 +41,7 @@ void Machine::Moving(const Point pos_mach) {
 	ball->SetBallPos(position_machine);
 }
 
-void Machine::Aiming(const Point pos_tar) {
+void Machine::Aiming(const Point& pos_tar) {
 
 	std::cout << "Machine Aiming......" << std::endl;
 
@@ -103,7 +103,7 @@ void Machine::Shaking() {
 	std::cout << "\t\t shaked_shoot_velocity: " << shoot_velocity << std::endl;
 }	//	Noise && Not completed	
 
-void Machine::LetsGo(const Point pos_mach, const Point pos_tar) {
+void Machine::LetsGo(const Point& pos_mach, const Point& pos_tar) {
 
 	Moving(pos_mach);
 
@@ -139,7 +139,7 @@ double Machine::Get_Move_Velocity(int Flag)const {
 	return 0;
 }
 
-void Machine::Moving_Dynamic(const Point pos_mach) {
+void Machine::Moving_Dynamic(const Point& pos_mach) {
 
 	std::cout << "Machine Moving......" << std::endl;
 
@@ -170,7 +170,7 @@ const Point Machine::Move_Predicting_Dynamic() const {
 	return machine_predict_pos;
 }
 
-void Machine::Aiming_Dynamic(const Point pos_tar) {
+void Machine::Aiming_Dynamic(const Point& pos_tar) {
 
 	std::cout << "Machine Aiming......" << std::endl;
 
@@ -272,7 +272,7 @@ void Machine::Shooting_Dynamic() {
 	ball->SetBallVelocity((Ball::Direction)2, vel_z);
 }
 
-void Machine::LetsGo_Dynamic(const Point pos_mach, const Point pos_tar) {
+void Machine::LetsGo_Dynamic(const Point& pos_mach, const Point& pos_tar) {
 
 	Moving_Dynamic(pos_mach);
 

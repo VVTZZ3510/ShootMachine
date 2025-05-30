@@ -25,7 +25,7 @@ const Ball* Machine::GetBall() const {
 	return ball;
 }
 
-void Machine::Moving(const Point pos_mach) {
+void Machine::Moving(const Point& pos_mach) {
 
 	std::cout << "Machine Moving......" << std::endl;
 
@@ -36,7 +36,7 @@ void Machine::Moving(const Point pos_mach) {
 	ball->SetBallPos(position_machine);
 }
 
-void Machine::Aiming(const Point pos_tar) {
+void Machine::Aiming(const Point& pos_tar) {
 
 	std::cout << "Machine Aiming......" << std::endl;
 
@@ -98,7 +98,7 @@ void Machine::Shaking() {
 	std::cout << "\t\t shaked_shoot_velocity: " << shoot_velocity << std::endl;
 }	//	Noise && Not completed	
 
-void Machine::LetsGo(const Point pos_mach, const Point pos_tar) {
+void Machine::LetsGo(const Point& pos_mach, const Point& pos_tar) {
 
 	Moving(pos_mach);
 

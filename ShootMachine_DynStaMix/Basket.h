@@ -8,15 +8,15 @@ extern const double HEIGHT;
 
 extern Ball* ball;
 
-class Basket
-{
+class Basket {
+
 public:
 
 	Basket();
 
 	~Basket();
 
-	const Point GetPosBasket() const;
+	const Point& GetPosBasket() const;
 	
 	bool CheckHit(const Ball* ball) const;
 

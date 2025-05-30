@@ -18,23 +18,23 @@ public:
 
 	//	Static
 
-	void Moving(const Point pos_mach);
+	void Moving(const Point& pos_mach);
 
-	void Aiming(const Point pos_tar);
+	void Aiming(const Point& pos_tar);
 
 	void Shooting();
 	
 	void Shaking();	//	Noise && Not completed
 
-	void LetsGo(const Point pos_mach, const Point pos_tar);
+	void LetsGo(const Point& pos_mach, const Point& pos_tar);
 
 	//	Dynamic
 
-	void Moving_Dynamic(const Point pos_mach);
+	void Moving_Dynamic(const Point& pos_mach);
 
 	const Point Move_Predicting_Dynamic() const;
 
-	void Aiming_Dynamic(const Point pos_tar);
+	void Aiming_Dynamic(const Point& pos_tar);
 
 	void Slipping_Dynamic(double shaked_time);
 
@@ -42,7 +42,7 @@ public:
 
 	void Shaking_Dynamic();
 
-	void LetsGo_Dynamic(const Point pos_mach, const Point pos_tar);
+	void LetsGo_Dynamic(const Point& pos_mach, const Point& pos_tar);
 
 private:
 

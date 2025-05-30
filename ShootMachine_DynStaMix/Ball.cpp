@@ -4,7 +4,7 @@ Ball::Ball() {
 
 }
 
-Ball::Ball(const Point pos) {
+Ball::Ball(const Point& pos) {
 
 	position_ball = pos;
 
@@ -17,7 +17,7 @@ Ball::~Ball() {
 
 }
 
-const Point Ball::GetBallPos() const {
+const Point& Ball::GetBallPos() const {
 
 	return position_ball;
 }
@@ -27,14 +27,14 @@ int Ball::GetBallDiameter() const {
 	return DIAMETER_BALL;
 }
 
-void Ball::SetBallPos(const Point new_pos) {
+void Ball::SetBallPos(const Point& new_pos) {
 
 	position_ball = new_pos;
 
 	std::cout << "\t Ball_position: (" << position_ball.x << " mm, " << position_ball.y << " mm, " << position_ball.z << " mm)" << std::endl;
 }
 
-void Ball::SetBallVelocity(const Ball::Direction dir, double vel) {
+void Ball::SetBallVelocity(Ball::Direction dir, double vel) {
 	
 	velocity[dir] = vel;
 

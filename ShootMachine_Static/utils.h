@@ -19,7 +19,7 @@ struct Point {
 	double z;
 };
 
-inline double get_distance(const Point startpoint, const Point endpoint) {
+inline double get_distance(const Point& startpoint, const Point& endpoint) {
 
 	double delta_x = endpoint.x - startpoint.x;
 	double delta_y = endpoint.y - startpoint.y;
@@ -28,7 +28,7 @@ inline double get_distance(const Point startpoint, const Point endpoint) {
 	return sqrt(delta_x * delta_x + delta_y * delta_y + delta_z * delta_z);
 }	//	返回两点距离
 
-inline double get_distance_xoy(const Point startpoint, const Point endpoint) {
+inline double get_distance_xoy(const Point& startpoint, const Point& endpoint) {
 
 	double delta_x = endpoint.x - startpoint.x;
 
@@ -40,7 +40,7 @@ inline double get_distance_xoy(const Point startpoint, const Point endpoint) {
 	return sqrt(delta_x * delta_x + delta_y * delta_y);
 }	//	返回两点XOY平面距离
 
-inline double figure_out_alpha(const Point startpoint, const Point endpoint) {
+inline double figure_out_alpha(const Point& startpoint, const Point& endpoint) {
 
 	double delta_x = endpoint.x - startpoint.x;
 

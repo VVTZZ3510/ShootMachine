@@ -1,7 +1,7 @@
 #include "Machine.h"
 #include "Basket.h"
 
-//	环境
+//	场地
 const double LENGTH_X = 10000;	//	mm
 const double LENGTH_Y = 10000;	//	mm
 const double HEIGHT = 2000;		//	mm

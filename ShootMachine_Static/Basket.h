@@ -1,18 +1,17 @@
 #pragma once
 
 #include "Ball.h"
+#include "DataLogger.h"
 
 extern const double LENGTH_X;
 extern const double LENGTH_Y;
 extern const double HEIGHT;
 
-extern Ball* ball;
-
 class Basket {
-	
+
 public:
 
-	Basket();
+	Basket(DataLogger* logger);
 
 	~Basket();
 
@@ -23,6 +22,8 @@ public:
 private:
 
 	Point position_basket = { LENGTH_X,LENGTH_Y / 2,HEIGHT };	//mm
+
+	DataLogger* datalogger;
 
 	int DIAMETER_BASKET = 264;	//mm
 };

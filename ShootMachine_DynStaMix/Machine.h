@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Ball.h"
+#include "DataLogger.h"
 
 const double VELOCITY_MAX = 15000;	//	mm/s
 const int DELAY1 = 22;	//	22ms
@@ -10,7 +11,7 @@ class Machine {
 
 public:
 
-	Machine();
+	Machine(DataLogger* logger);
 
 	~Machine();
 
@@ -52,6 +53,8 @@ private:
 	double alpha;		//	Radian
 	double theta;		//	Radian
 	double shoot_velocity;	//	mm/s
+
+	DataLogger* datalogger;
 
 	//	Dynamic
 	double MOVE_VELOCITY = 1000;	//	mm/s

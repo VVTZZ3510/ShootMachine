@@ -1,10 +1,12 @@
 #include "Basket.h"
 
-Basket::Basket() {
+Basket::Basket(DataLogger* logger) {
 
 	std::cout << "Building Basket......" << std::endl;
 	std::cout << "\t Basket_position: (" << position_basket.x << " mm, " << position_basket.y << " mm, " << position_basket.z << " mm)" << std::endl;
 	std::cout << "\t Basket_diameter: " << DIAMETER_BASKET << " mm" << std::endl;
+
+	datalogger = logger;
 }
 
 Basket::~Basket() {
@@ -27,6 +29,12 @@ bool Basket::CheckHit(const Ball* ball) const {
 		isHit = true;
 	
 	std::cout << "Basket Checking......" << std::endl;
+	
+	if (isHit)
+		datalogger->InsertSlot(DataLogger::ShootSlot::IsHit, 1);
+	else
+		datalogger->InsertSlot(DataLogger::ShootSlot::IsHit, 0);
+	
 	std::cout << "\t isHit: " << isHit << std::endl;
 
 	return isHit;

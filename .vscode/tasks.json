@@ -11,6 +11,7 @@
 				"${fileDirname}/Ball.cpp",
 				"${fileDirname}/Machine.cpp",
 				"${fileDirname}/Basket.cpp",
+				"${fileDirname}/DataLogger.cpp",
 				"${fileDirname}/main.cpp",
 				"-o",
 				"${fileDirname}/${fileDirnameBasename}.exe"

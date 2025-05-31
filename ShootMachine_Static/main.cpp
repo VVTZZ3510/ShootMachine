@@ -12,8 +12,11 @@ int main() {
 	 
 	srand((int)time(NULL));
 
-	Basket basket;
-	Machine machine;
+	std::string filename = "Basketball_DataSet.csv";
+	DataLogger* datalogger = new DataLogger(filename);
+
+	Machine machine(datalogger);
+	Basket basket(datalogger);
 
 	static int LAUNCH_TIMES = 0;
 	static int HIT_TIMES = 0;
@@ -30,9 +33,13 @@ int main() {
 		if (basket.CheckHit(machine.GetBall()))
 			HIT_TIMES++;
 		std::cout << "*********************************************************************************" << std::endl;
+
+		datalogger->LogData();
 	}
 
 	std::cout << "Hit Chance: " << (double)HIT_TIMES / LAUNCH_TIMES << std::endl;
+
+	delete datalogger;
 
 	return 0;
 }

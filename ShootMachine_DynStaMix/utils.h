@@ -116,7 +116,7 @@ inline double generate_gaussian(double mean, double stddev) {
 
 //	Dynamic
 
-inline Point vector_subtract_xoy(const Point& point1, const Point& point2) {
+inline const Point vector_subtract_xoy(const Point& point1, const Point& point2) {
 
 	Point tmp = { 0,0,0 };
 	tmp.x = point2.x - point1.x;

@@ -1,12 +1,12 @@
 #include "Machine.h"
 #include "Basket.h"
 
-const bool is_Dynamic = true;
-
 //	³¡µØ
 const double LENGTH_X = 10000;	//	mm
 const double LENGTH_Y = 10000;	//	mm
 const double HEIGHT = 2000;		//	mm
+
+const bool is_Dynamic = true;
 
 Point GenerateLaunchPosition();
 
@@ -14,8 +14,11 @@ int main() {
 	 
 	srand((int)time(NULL));
 
-	Basket basket;
-	Machine machine;
+	std::string filename = "Basketball_DataSet.csv";
+	DataLogger* datalogger = new DataLogger(filename, is_Dynamic);
+
+	Machine machine(datalogger);
+	Basket basket(datalogger);
 
 	static int LAUNCH_TIMES = 0;
 	static int HIT_TIMES = 0;
@@ -23,7 +26,7 @@ int main() {
 	//Point pos = { 5500,5500,0 };
 	//machine.Moving(pos);
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 5; ++i) {
 
 		if(is_Dynamic)
 			machine.LetsGo_Dynamic(GenerateLaunchPosition(), basket.GetPosBasket());
@@ -35,9 +38,13 @@ int main() {
 		if (basket.CheckHit(machine.GetBall()))
 			HIT_TIMES++;
 		std::cout << "*********************************************************************************" << std::endl;
+
+		datalogger->LogData();
 	}
 
 	std::cout << "Hit Chance: " << (double)HIT_TIMES / LAUNCH_TIMES << std::endl;
+
+	delete datalogger;
 
 	/*machine.LetsGo_Dynamic(GenerateLaunchPosition(), basket.GetPosBasket());
 	basket.CheckHit(machine.GetBall());*/

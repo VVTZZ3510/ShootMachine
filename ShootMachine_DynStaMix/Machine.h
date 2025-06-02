@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Ball.h"
-#include "DataLogger.h"
 
 const double VELOCITY_MAX = 15000;	//	mm/s
 const int DELAY1 = 22;	//	22ms
@@ -11,13 +10,27 @@ class Machine {
 
 public:
 
+	Machine();
+
 	Machine(DataLogger* logger);
 
 	~Machine();
 
+	//	Static
+
+		// tool
+
+	const Point& GetPosition() const;
+
+	double GetAlpha() const;
+
+	double GetTheta() const;
+
+	double GetShootVelocity() const;
+
 	const Ball* GetBall() const;
 
-	//	Static
+		//process
 
 	void Moving(const Point& pos_mach);
 
@@ -30,6 +43,14 @@ public:
 	void LetsGo(const Point& pos_mach, const Point& pos_tar);
 
 	//	Dynamic
+
+		// tool
+
+	double GetMoveVelocity(int Flag) const;
+
+	double GetBeta() const;
+
+		//	process
 
 	void Moving_Dynamic(const Point& pos_mach);
 
@@ -47,6 +68,10 @@ public:
 
 private:
 
+	DataLogger* datalogger;
+
+	//	Static
+
 	Point position_machine;		//	mm
 	Ball* ball;
 
@@ -54,11 +79,8 @@ private:
 	double theta;		//	Radian
 	double shoot_velocity;	//	mm/s
 
-	DataLogger* datalogger;
-
 	//	Dynamic
+
 	double MOVE_VELOCITY = 1000;	//	mm/s
 	double beta;		//	Radian
-
-	double Get_Move_Velocity(int Flag) const;
 };

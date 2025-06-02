@@ -1,6 +1,10 @@
 #include "Machine.h"
 
-Machine::Machine(DataLogger* logger) {
+Machine::Machine() : Machine(nullptr) {
+
+}
+
+Machine::Machine(DataLogger* logger) : datalogger(logger) {
 
 	std::cout << "Building Machine......" << std::endl;
 
@@ -13,13 +17,21 @@ Machine::Machine(DataLogger* logger) {
 	alpha = 0;
 	theta = 0;
 	shoot_velocity = 0;
-
-	datalogger = logger;
 }
 
 Machine::~Machine() {
 
-	delete ball;
+	if(ball!=nullptr)
+		delete ball;
+}
+
+//	Static
+
+	//	tool
+
+const Point& Machine::GetPosition() const {
+
+	return position_machine;
 }
 
 const Ball* Machine::GetBall() const {
@@ -27,19 +39,37 @@ const Ball* Machine::GetBall() const {
 	return ball;
 }
 
+double Machine::GetAlpha() const {
 
-//	Static
+	return alpha;
+}
+
+double Machine::GetTheta() const {
+
+	return theta;
+}
+
+double Machine::GetShootVelocity() const {
+
+	return shoot_velocity;
+}
+
+	//	process
 
 void Machine::Moving(const Point& pos_mach) {
 
 	std::cout << "Machine Moving......" << std::endl;
 
 	position_machine = pos_mach;
-	datalogger->InsertSlot(DataLogger::ShootSlot::Machine_X, position_machine.x);
-	datalogger->InsertSlot(DataLogger::ShootSlot::Machine_Y, position_machine.y);
 	std::cout << "\t Machine_position: ( " << position_machine.x << " mm, " << position_machine.y << " mm, " << position_machine.z << " mm)" << std::endl;
 
 	ball->SetBallPos(position_machine);
+
+	if (datalogger != nullptr) {
+
+		datalogger->InsertSlot(DataLogger::ShootSlot::Machine_X, position_machine.x);
+		datalogger->InsertSlot(DataLogger::ShootSlot::Machine_Y, position_machine.y);
+	}
 }
 
 void Machine::Aiming(const Point& pos_tar) {
@@ -47,7 +77,6 @@ void Machine::Aiming(const Point& pos_tar) {
 	std::cout << "Machine Aiming......" << std::endl;
 
 	alpha = figure_out_alpha(position_machine, pos_tar);
-	datalogger->InsertSlot(DataLogger::ShootSlot::Alpha_Ideal, alpha);
 	std::cout << "\t alpha: " << alpha << std::endl;
 
 	double distance = get_distance_xoy(position_machine, pos_tar);
@@ -55,12 +84,17 @@ void Machine::Aiming(const Point& pos_tar) {
 	double velocity_mini = figure_out_velocity_mini(distance, pos_tar.z);
 
 	shoot_velocity = (VELOCITY_MAX + velocity_mini) / 2;
-	datalogger->InsertSlot(DataLogger::ShootSlot::ShootVelocity_Ideal, shoot_velocity);
 	std::cout << "\t shoot_velocity: " << shoot_velocity << std::endl;
 
 	theta = figure_out_theta(distance, pos_tar.z, shoot_velocity);
-	datalogger->InsertSlot(DataLogger::ShootSlot::Theta_Ideal, theta);
 	std::cout << "\t theta: " << theta << std::endl;
+
+	if (datalogger != nullptr) {
+
+		datalogger->InsertSlot(DataLogger::ShootSlot::Alpha_Ideal, alpha);
+		datalogger->InsertSlot(DataLogger::ShootSlot::ShootVelocity_Ideal, shoot_velocity);
+		datalogger->InsertSlot(DataLogger::ShootSlot::Theta_Ideal, theta);
+	}
 }
 
 void Machine::Shooting() {
@@ -78,8 +112,6 @@ void Machine::Shooting() {
 	ball->SetBallVelocity((Ball::Direction)0, vel_x);
 	ball->SetBallVelocity((Ball::Direction)1, vel_y);
 	ball->SetBallVelocity((Ball::Direction)2, vel_z);
-
-
 }
 
 void Machine::Shaking() {
@@ -88,28 +120,32 @@ void Machine::Shaking() {
 
 	int time_len = DELAY2 - DELAY1;
 	
-	double delta_t = (double)(DELAY1 + DELAY2) / 2 + ((double)(rand() % time_len) - (double)(time_len / 2));
+	double delta_t = (double)(DELAY1 + DELAY2) / 2 + ((double)(rand() % time_len) - ((double)time_len / 2));
 	delta_t *= 1e-03;
-	datalogger->InsertSlot(DataLogger::ShootSlot::Shaked_Time, delta_t);
 	std::cout << "\t\t shaked_time: " << delta_t << std::endl;
 
 	double delta_alpha = generate_gaussian(0.0, 1.0);
 	alpha += delta_alpha * delta_t;
 	//alpha = alpha;
-	datalogger->InsertSlot(DataLogger::ShootSlot::Alpha_Shaked, alpha);
 	std::cout << "\t\t shaked_alpha: " << alpha << std::endl;
 
 	double delta_theta = generate_gaussian(0.0, 0.5);
 	theta += delta_theta * delta_t;
 	//theta = theta;
-	datalogger->InsertSlot(DataLogger::ShootSlot::Theta_Shaked, theta);
 	std::cout << "\t\t shaked_theta: " << theta << std::endl;
 
 	double delta_velocity = generate_gaussian(0, (delta_t - (DELAY1 * 1e-03)));
 	shoot_velocity = shoot_velocity * (1 + delta_velocity);
 	//shoot_velocity = shoot_velocity;
-	datalogger->InsertSlot(DataLogger::ShootSlot::ShootVelocity_Shaked, shoot_velocity);
 	std::cout << "\t\t shaked_shoot_velocity: " << shoot_velocity << std::endl;
+
+	if (datalogger != nullptr) {
+
+		datalogger->InsertSlot(DataLogger::ShootSlot::Shaked_Time, delta_t);
+		datalogger->InsertSlot(DataLogger::ShootSlot::Alpha_Shaked, alpha);
+		datalogger->InsertSlot(DataLogger::ShootSlot::Theta_Shaked, theta);
+		datalogger->InsertSlot(DataLogger::ShootSlot::ShootVelocity_Shaked, shoot_velocity);
+	}
 }	//	Noise && Not completed	
 
 void Machine::LetsGo(const Point& pos_mach, const Point& pos_tar) {
@@ -122,3 +158,4 @@ void Machine::LetsGo(const Point& pos_mach, const Point& pos_tar) {
 
 	ball->BallFlyDown(pos_tar.x);
 }
+

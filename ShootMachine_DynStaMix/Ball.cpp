@@ -1,9 +1,5 @@
 #include "Ball.h"
 
-Ball::Ball() {
-
-}
-
 Ball::Ball(const Point& pos) {
 
 	position_ball = pos;

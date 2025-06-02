@@ -6,7 +6,7 @@ const double LENGTH_X = 10000;	//	mm
 const double LENGTH_Y = 10000;	//	mm
 const double HEIGHT = 2000;		//	mm
 
-const bool is_Dynamic = true;
+const bool ShootMODE = false;	//	true --> Dynamic	false --> Static
 
 Point GenerateLaunchPosition();
 
@@ -15,7 +15,7 @@ int main() {
 	srand((int)time(NULL));
 
 	std::string filename = "Basketball_DataSet.csv";
-	DataLogger* datalogger = new DataLogger(filename, is_Dynamic);
+	DataLogger* datalogger = new DataLogger(filename, ShootMODE);
 
 	Machine machine(datalogger);
 	Basket basket(datalogger);
@@ -28,15 +28,18 @@ int main() {
 
 	for (int i = 0; i < 5; ++i) {
 
-		if(is_Dynamic)
+		if(ShootMODE)
 			machine.LetsGo_Dynamic(GenerateLaunchPosition(), basket.GetPosBasket());
 		else
 			machine.LetsGo(GenerateLaunchPosition(), basket.GetPosBasket());
 
 		LAUNCH_TIMES++;
 
-		if (basket.CheckHit(machine.GetBall()))
+		if (basket.CheckHit(machine.GetBall())) {
+
 			HIT_TIMES++;
+		}
+
 		std::cout << "*********************************************************************************" << std::endl;
 
 		datalogger->LogData();

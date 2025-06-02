@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Ball.h"
-#include "DataLogger.h"
 
 extern const double LENGTH_X;
 extern const double LENGTH_Y;

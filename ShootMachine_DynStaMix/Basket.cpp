@@ -29,13 +29,15 @@ bool Basket::CheckHit(const Ball* ball) const {
 		isHit = true;
 	
 	std::cout << "Basket Checking......" << std::endl;
-	
-	if (isHit)
-		datalogger->InsertSlot(DataLogger::ShootSlot::IsHit, 1);
-	else
-		datalogger->InsertSlot(DataLogger::ShootSlot::IsHit, 0);
-	
 	std::cout << "\t isHit: " << isHit << std::endl;
+
+	if (datalogger != nullptr) {
+
+		if (isHit)
+			datalogger->InsertSlot(DataLogger::ShootSlot::IsHit, 1);
+		else
+			datalogger->InsertSlot(DataLogger::ShootSlot::IsHit, 0);
+	}
 
 	return isHit;
 }

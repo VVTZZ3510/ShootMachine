@@ -8,8 +8,6 @@ class DataLogger {
 
 public:
 
-	DataLogger() = default;
-
 	DataLogger(std::string& filename, bool sport_status);
 	
 	~DataLogger();

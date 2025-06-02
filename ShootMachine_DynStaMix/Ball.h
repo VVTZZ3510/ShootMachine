@@ -3,12 +3,11 @@
 //#include <iostream>
 #include <map>
 #include "utils.h"
+#include "DataLogger.h"
 
 class Ball {
 
 public:
-
-	Ball();
 
 	Ball(const Point& pos);
 
